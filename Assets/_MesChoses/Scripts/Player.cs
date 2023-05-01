@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _vitesse = 10;
     [SerializeField] float _jumpPower = 55;
     BoxCollider2D _collider = default;
+    SpriteRenderer _playerSprtie = default;
 
 
     private Animator _animatorPlayer;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         _playerRb= GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
         _animatorPlayer = GetComponent<Animator>();
+        _playerSprtie= GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -45,11 +47,13 @@ public class Player : MonoBehaviour
         {
             _animatorPlayer.SetBool("TurnRight", true);
             //_animatorPlayer.SetBool("TurnLeft", false);
+            _playerSprtie.flipX = false;
         }
         else if(horizInput < 0) 
         {
-            _animatorPlayer.SetBool("TurnRight", false);
+            //_animatorPlayer.SetBool("TurnRight", false);
             //_animatorPlayer.SetBool("TurnLeft", true);
+            _playerSprtie.flipX = true;
         }
         else
         {
