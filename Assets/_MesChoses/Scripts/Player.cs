@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] float _jumpPower = 55;
     BoxCollider2D _collider = default;
     SpriteRenderer _playerSprtie = default;
+    private GameObject attackArea = default;
 
 
     private Animator _animatorPlayer;
     private Rigidbody2D _playerRb = default;
     public LayerMask groundLayer;
+    private float tempsPourAttack = 0.75f;
+    private float timer = 0f;
+    private bool attacking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +25,39 @@ public class Player : MonoBehaviour
         _collider = GetComponent<BoxCollider2D>();
         _animatorPlayer = GetComponent<Animator>();
         _playerSprtie= GetComponent<SpriteRenderer>();
+        attackArea = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         Mouvement();
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Attack();
+            _animatorPlayer.SetBool("isAttacking", true);
+        }
+        if (attacking)
+        {
+            timer += Time.deltaTime;
+            if(timer >= tempsPourAttack) 
+            {
+                _animatorPlayer.SetBool("isAttacking", false);
+                timer= 0f;
+                attacking= false;
+                attackArea.SetActive(attacking);
+                
+            }
+        }
+    }
+
+    
+
+    private void Attack()
+    {
+        attacking = true;
+        attackArea.SetActive(attacking);
     }
 
     private void Mouvement()
@@ -46,26 +77,22 @@ public class Player : MonoBehaviour
         if(horizInput > 0)
         {
             _animatorPlayer.SetBool("TurnRight", true);
-            //_animatorPlayer.SetBool("TurnLeft", false);
             _playerSprtie.flipX = false;
         }
         else if(horizInput < 0) 
         {
-            //_animatorPlayer.SetBool("TurnRight", false);
-            //_animatorPlayer.SetBool("TurnLeft", true);
+            _animatorPlayer.SetBool("TurnRight", true);
             _playerSprtie.flipX = true;
         }
         else
         {
             _animatorPlayer.SetBool("TurnRight", false);
-            //_animatorPlayer.SetBool("TurnLeft", false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             _animatorPlayer.SetBool("inAir", true);
             _playerRb.velocity = new Vector2(0, _jumpPower * 2);
-
         }
     }
 
@@ -82,6 +109,8 @@ public class Player : MonoBehaviour
             return false;
          }
     }
+
+
 
 }
 

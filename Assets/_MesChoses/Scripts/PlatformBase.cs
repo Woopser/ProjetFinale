@@ -10,4 +10,10 @@ public class PlatformBase : MonoBehaviour
     {
         transform.Translate(Vector3.down * Time.deltaTime * _vitesse);
     }
+
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 }

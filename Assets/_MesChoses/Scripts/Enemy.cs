@@ -14,34 +14,28 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        MoveLeft();
+        Move();
     }
 
-    public void MoveLeft()
+    public void Move()
     {
-        float horizPos = transform.position.x;
-        if(horizPos < (xInitiale - 1.88))
+        if(xInitiale< 0)
         {
-            MoveRight();
+            transform.Translate(Vector2.right * Time.deltaTime * _vitesse);
         }
-        else
+        else if(xInitiale > 0) 
         {
             transform.Translate(Vector2.left * Time.deltaTime * _vitesse);
         }
         
     }
 
-    public void MoveRight()
-    { //https://www.youtube.com/watch?v=wJMXmqxlGR4 video youtube pour faire le mouvement du slime
-        float horizPos = transform.position.x;
-        if (horizPos > (xInitiale + 1.92))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
         {
-            MoveLeft();
+            Destroy(collision.gameObject);
         }
-        else
-        {
-            transform.Translate(Vector2.left * Time.deltaTime * _vitesse);
-        }
-
     }
+
 }
