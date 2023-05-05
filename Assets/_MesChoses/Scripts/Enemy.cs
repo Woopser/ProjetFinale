@@ -36,6 +36,11 @@ public class Enemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Player")
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.Dommage();
+        }
     }
 
 }

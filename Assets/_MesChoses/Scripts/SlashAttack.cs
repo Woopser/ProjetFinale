@@ -8,7 +8,7 @@ public class SlashAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Kamikaze")
+        if(collision.tag == "Enemy")
         {
             Destroy(collision.gameObject);
         }

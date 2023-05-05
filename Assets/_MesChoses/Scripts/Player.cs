@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] float _jumpPower = 55;
     BoxCollider2D _collider = default;
     SpriteRenderer _playerSprtie = default;
-    private GameObject attackArea = default;
+    private GameObject attackAreaRight = default;
+    private GameObject attackAreaLeft = default;
+    [SerializeField] private float _lives = 3;
 
 
     private Animator _animatorPlayer;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     private float tempsPourAttack = 0.75f;
     private float timer = 0f;
     private bool attacking = false;
+    private float _jumpIni; 
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +28,9 @@ public class Player : MonoBehaviour
         _collider = GetComponent<BoxCollider2D>();
         _animatorPlayer = GetComponent<Animator>();
         _playerSprtie= GetComponent<SpriteRenderer>();
-        attackArea = transform.GetChild(0).gameObject;
+        attackAreaRight = transform.GetChild(0).gameObject;
+        attackAreaLeft = transform.GetChild(1).gameObject;
+        _jumpIni= _jumpPower;
     }
 
     // Update is called once per frame
@@ -33,7 +38,7 @@ public class Player : MonoBehaviour
     {
         Mouvement();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && isGrounded())
         {
             Attack();
             _animatorPlayer.SetBool("isAttacking", true);
@@ -46,10 +51,13 @@ public class Player : MonoBehaviour
                 _animatorPlayer.SetBool("isAttacking", false);
                 timer= 0f;
                 attacking= false;
-                attackArea.SetActive(attacking);
+                attackAreaLeft.SetActive(attacking);
+                attackAreaRight.SetActive(attacking);
                 
             }
         }
+
+        
     }
 
     
@@ -57,7 +65,15 @@ public class Player : MonoBehaviour
     private void Attack()
     {
         attacking = true;
-        attackArea.SetActive(attacking);
+        if(_playerSprtie.flipX == false)
+        {
+            attackAreaRight.SetActive(attacking);
+        }
+        else if(_playerSprtie.flipX == true)
+        {
+            attackAreaLeft.SetActive(attacking);
+        }
+        
     }
 
     private void Mouvement()
@@ -110,7 +126,31 @@ public class Player : MonoBehaviour
          }
     }
 
+    public void PowerUpJump()
+    {
+        _jumpPower *= 1.25f;
+        StartCoroutine(JumpCoroutine());
+    }
 
+    IEnumerator JumpCoroutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _jumpPower = _jumpIni;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "FireBall")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Dommage()
+    {
+        _lives--;
+        _animatorPlayer.SetBool("Hurt", true);
+    }
 
 }
 
