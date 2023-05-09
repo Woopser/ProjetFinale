@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
 
-    // _powerUpID  0=Jump   1=?    2=?
+    // _powerUpID  0=Jump   1=knife   2=?
     [SerializeField] private int _powerUpID = default;
     //[SerializeField] private AudioClip _powerUpSound = default;
     Player _playerPrefab;
@@ -36,6 +36,9 @@ public class PowerUp : MonoBehaviour
                 {
                     case 0:
                         player.PowerUpJump();
+                        break;
+                    case 1:
+                        player.PowerUpKnife();
                         break;
 
                 }

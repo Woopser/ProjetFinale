@@ -8,6 +8,7 @@ TagManager:
   - FireBall
   - Enemy
   - Kamikaze
+  - knife
   layers:
   - Default
   - TransparentFX

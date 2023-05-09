@@ -507,6 +507,7 @@ MonoBehaviour:
   - {fileID: 5929414452894975129, guid: 26fded9560b2edc479846685778dc7bf, type: 3}
   - {fileID: 5852853938442231801, guid: 4e8d5359e6df1854f825553027b1db23, type: 3}
   - {fileID: 2165764778000025017, guid: e7dbcc6f037e20548801bee9a5caea74, type: 3}
+  - {fileID: 7941050693262503219, guid: ee42fdc39f86f17419f803ec7c172085, type: 3}
   _delai: 4
 --- !u!1 &1323065647
 GameObject:
@@ -819,6 +820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vitesse: 10
   _jumpPower: 4
+  _lives: 3
+  knife: {fileID: 1337201434025232157, guid: 6216e4f5f28707042a55bc4efbec5a1b, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

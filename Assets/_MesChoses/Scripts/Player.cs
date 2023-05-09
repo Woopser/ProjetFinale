@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     private GameObject attackAreaRight = default;
     private GameObject attackAreaLeft = default;
     [SerializeField] private float _lives = 3;
-
+    private bool isDead = false;
+    private bool hasKnife = true;
+    [SerializeField] GameObject knife = default;
 
     private Animator _animatorPlayer;
     private Rigidbody2D _playerRb = default;
@@ -36,8 +38,29 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Mouvement();
+        if (!isDead)
+        {
+            Mouvement();
+            GestionAttack();
+            LancerCouteau();
+        }
 
+
+
+
+    }
+
+    private void LancerCouteau()
+    {
+        if (Input.GetKeyDown(KeyCode.C) && hasKnife)
+        {
+            GameObject knifer = Instantiate(knife, transform.position, Quaternion.identity);
+            hasKnife = false;
+        }
+    }
+
+    private void GestionAttack()
+    {
         if (Input.GetKeyDown(KeyCode.X) && isGrounded())
         {
             Attack();
@@ -46,21 +69,18 @@ public class Player : MonoBehaviour
         if (attacking)
         {
             timer += Time.deltaTime;
-            if(timer >= tempsPourAttack) 
+            if (timer >= tempsPourAttack)
             {
                 _animatorPlayer.SetBool("isAttacking", false);
-                timer= 0f;
-                attacking= false;
+                timer = 0f;
+                attacking = false;
                 attackAreaLeft.SetActive(attacking);
                 attackAreaRight.SetActive(attacking);
-                
+
             }
         }
-
-        
     }
 
-    
 
     private void Attack()
     {
@@ -138,18 +158,21 @@ public class Player : MonoBehaviour
         _jumpPower = _jumpIni;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void PowerUpKnife()
     {
-        if(collision.gameObject.tag == "FireBall")
-        {
-            Destroy(gameObject);
-        }
+        Debug.Log("Ici");
+       hasKnife= true;
     }
 
     public void Dommage()
     {
         _lives--;
         _animatorPlayer.SetBool("Hurt", true);
+        if(_lives < 0)
+        {
+            _animatorPlayer.SetBool("dead", true);
+            isDead = true;
+        }
     }
 
 }
