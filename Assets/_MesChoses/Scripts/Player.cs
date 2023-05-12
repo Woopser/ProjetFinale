@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         {
             Mouvement();
             GestionAttack();
-            LancerCouteau();
+            Bombe();
         }
 
 
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void LancerCouteau()
+    private void Bombe()
     {
         if (Input.GetKeyDown(KeyCode.C) && hasKnife)
         {
@@ -161,18 +161,26 @@ public class Player : MonoBehaviour
     public void PowerUpKnife()
     {
         Debug.Log("Ici");
-       hasKnife= true;
+        hasKnife= true;
     }
 
     public void Dommage()
     {
         _lives--;
         _animatorPlayer.SetBool("Hurt", true);
-        if(_lives < 0)
+        StartCoroutine(hurtless());
+        if(_lives <= 0)
         {
             _animatorPlayer.SetBool("dead", true);
             isDead = true;
         }
+        
+
+    }
+    IEnumerator hurtless()
+    {
+        yield return new WaitForSeconds(1f);
+        _animatorPlayer.SetBool("Hurt", false);
     }
 
 }
