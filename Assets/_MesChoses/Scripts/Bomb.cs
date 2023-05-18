@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour
 
     private GameObject Radius = default;
     private CircleCollider2D colluder = default;
+    [SerializeField] float detonation = 0.15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class Bomb : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Radius.SetActive(true);
         colluder.enabled = false;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(detonation);
         Destroy(gameObject);
     }
 

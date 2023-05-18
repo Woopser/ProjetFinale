@@ -6,8 +6,10 @@ using UnityEngine;
 public class SkullEnemy : MonoBehaviour
 {
     private float xInitiale;
+    private float _points = 100;
     private SpriteRenderer _sprite = default;
     [SerializeField] GameObject _projectile = default;
+    private UIManager _uiManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class SkullEnemy : MonoBehaviour
             _sprite.flipX = true;
         }
         StartCoroutine(Feu());
+        _uiManager = FindObjectOfType<UIManager>().GetComponent<UIManager>();
     }
 
     IEnumerator Feu()
@@ -29,13 +32,13 @@ public class SkullEnemy : MonoBehaviour
             {
                 Vector3 left = new Vector3(-1, 0,0);
                 Vector3 pos = transform.position + left;
-                GameObject Fire1 = Instantiate(_projectile, pos, Quaternion.identity);
+                GameObject Fire1 = Instantiate( _projectile, pos, Quaternion.identity);
             }
             else if (_sprite.flipX == false)
             {
                 Vector3 right = new Vector3(1, 0, 0);
                 Vector3 pos = transform.position + right;
-                GameObject Fire1 = Instantiate(_projectile, pos, Quaternion.identity);
+                GameObject Fire2 = Instantiate(_projectile, pos, Quaternion.identity);
             }
 
             yield return new WaitForSeconds(3f);
@@ -43,6 +46,12 @@ public class SkullEnemy : MonoBehaviour
         
         
 
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
+        _uiManager.PlusScore(_points);
     }
 
 }

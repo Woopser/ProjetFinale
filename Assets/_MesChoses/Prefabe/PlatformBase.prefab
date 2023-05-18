@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa16fd9d9d3b58a4e98aa8ac8b751dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vitesse: 1
+  _vitesse: 0.8
 --- !u!60 &3386136706826045365
 PolygonCollider2D:
   m_ObjectHideFlags: 0

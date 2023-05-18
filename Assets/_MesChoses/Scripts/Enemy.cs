@@ -5,12 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float _vitesse = 2f;
+    private UIManager _uiManager;
     private float xInitiale;
+    private float _points = 100f;
     // Update is called once per frame
 
     private void Start()
     {
         xInitiale = transform.position.x;
+        _uiManager = FindObjectOfType<UIManager>().GetComponent<UIManager>();
     }
     void Update()
     {
@@ -41,6 +44,12 @@ public class Enemy : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             player.Dommage();
         }
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
+        _uiManager.PlusScore(_points);
     }
 
 }

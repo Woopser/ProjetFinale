@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 1317021333}
   - component: {fileID: 1317021332}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,8 +544,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -240, y: -107.82}
-  m_SizeDelta: {x: 393.0736, y: 91.6433}
+  m_AnchoredPosition: {x: -295.8734, y: -107.82001}
+  m_SizeDelta: {x: 504.8203, y: 91.6433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317021332
 MonoBehaviour:
@@ -567,10 +567,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score : '
+  m_text: 'Score : 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9c2e6fe4ae94eb48820452c777b7b0b, type: 2}
+  m_sharedMaterial: {fileID: -751823320331848398, guid: b9c2e6fe4ae94eb48820452c777b7b0b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -594,13 +594,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.35
-  m_fontSizeBase: 56.35
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -710,8 +710,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140.99573, y: -146.49683}
-  m_SizeDelta: {x: 191.9915, y: 168.9937}
+  m_AnchoredPosition: {x: 165, y: -162}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483185675
 MonoBehaviour:
@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 1550452423}
   - component: {fileID: 1550452422}
   - component: {fileID: 1550452421}
+  - component: {fileID: 1550452425}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -853,6 +854,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1550452425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550452420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e62c30ffecd596428385bc478a0269b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ScoreTxt: {fileID: 0}
+  _LivesImage: {fileID: 1483185675}
+  _liveSprites:
+  - {fileID: 21300000, guid: df20f90b61468cf46ac30fb4d258bdc1, type: 3}
+  - {fileID: 21300000, guid: 0d3e542041db03f4bb7384d4b09364c3, type: 3}
+  - {fileID: 21300000, guid: 15cc575b0d9a36846838578bfb080819, type: 3}
+  _pointageAugment: 400
 --- !u!1 &1581944009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vitesse: 10
-  _jumpPower: 4.3
+  _jumpPower: 4.4
   _lives: 3
   knife: {fileID: 8328223617673461402, guid: fc0a97c6512e43141a06d3e8925850d5, type: 3}
   groundLayer:

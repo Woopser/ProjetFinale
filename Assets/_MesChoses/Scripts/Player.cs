@@ -11,10 +11,11 @@ public class Player : MonoBehaviour
     SpriteRenderer _playerSprtie = default;
     private GameObject attackAreaRight = default;
     private GameObject attackAreaLeft = default;
-    [SerializeField] private float _lives = 3;
+    [SerializeField] private int _lives = 3;
     private bool isDead = false;
     private bool hasKnife = true;
     [SerializeField] GameObject knife = default;
+    private UIManager _uiManager;
 
     private Animator _animatorPlayer;
     private Rigidbody2D _playerRb = default;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         attackAreaRight = transform.GetChild(0).gameObject;
         attackAreaLeft = transform.GetChild(1).gameObject;
         _jumpIni= _jumpPower;
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
@@ -168,6 +170,7 @@ public class Player : MonoBehaviour
     {
         _lives--;
         _animatorPlayer.SetBool("Hurt", true);
+        _uiManager.ChangeImageLive(_lives);
         StartCoroutine(hurtless());
         if(_lives <= 0)
         {

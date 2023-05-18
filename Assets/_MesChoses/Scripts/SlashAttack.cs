@@ -8,10 +8,20 @@ public class SlashAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            if (collision.GetComponent<SkullEnemy>() != null)
+            {
+                SkullEnemy enemy = collision.GetComponent<SkullEnemy>();
+                enemy.Dead();
+            }
+            else if (collision.GetComponent<Enemy>() != null)
+            {
+                Enemy enemy = collision.GetComponent<Enemy>();
+                enemy.Dead();
+            }
         }
-        
+
+
     }
 }
