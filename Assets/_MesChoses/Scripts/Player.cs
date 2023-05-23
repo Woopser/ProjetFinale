@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -45,11 +46,26 @@ public class Player : MonoBehaviour
             Mouvement();
             GestionAttack();
             Bombe();
+            if(transform.position.y < -5.25f)
+            {
+                Died();
+            }
         }
+        
 
 
 
+    }
 
+    private void Died()
+    {
+        _lives = 0;
+        _animatorPlayer.SetBool("dead", true);
+        isDead = true;
+        _uiManager.ChangeImageLive(0);
+        PlayerPrefs.SetFloat("Score", _uiManager.getScore());
+        PlayerPrefs.SetFloat("Temps", _uiManager.getTIme());
+        ChangerScene();
     }
 
     private void Bombe()
@@ -174,8 +190,7 @@ public class Player : MonoBehaviour
         StartCoroutine(hurtless());
         if(_lives <= 0)
         {
-            _animatorPlayer.SetBool("dead", true);
-            isDead = true;
+            Died();
         }
         
 
@@ -186,5 +201,10 @@ public class Player : MonoBehaviour
         _animatorPlayer.SetBool("Hurt", false);
     }
 
+    public void ChangerScene()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index + 1);
+    }
 }
 
